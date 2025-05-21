@@ -6,33 +6,35 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #e9f0f5;
+      background: url('https://source.unsplash.com/1600x900/?office,parking') no-repeat center center fixed;
+      background-size: cover;
       margin: 0;
       padding: 0;
     }
 
     .container {
       max-width: 500px;
-      margin: 50px auto;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      padding: 30px;
+      margin: 60px auto;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 30px 25px;
     }
 
     h2 {
       text-align: center;
       color: #1a73e8;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     input, select, button {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-bottom: 15px;
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 6px;
+      box-sizing: border-box;
     }
 
     button {
@@ -40,6 +42,7 @@
       color: white;
       border: none;
       cursor: pointer;
+      font-weight: bold;
       transition: background-color 0.3s ease;
     }
 
@@ -47,17 +50,16 @@
       background-color: #0b5ed7;
     }
 
-    iframe {
-      display: none;
-    }
-
     .footer {
       text-align: center;
       font-size: 13px;
-      color: #777;
+      color: #555;
       margin-top: 20px;
     }
 
+    iframe {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -67,7 +69,8 @@
 
     <form method="POST" 
           action="https://script.google.com/macros/s/AKfycbwTmKzuu9lI9AVEJWaxNRG5OXg0VMkMiHhaiEdV_ZsGI7XTFZyztoeD-t-7082WPWXK/exec" 
-          target="dummyframe">
+          target="dummyframe"
+          onsubmit="tampilkanNotifikasi()">
       
       <input type="date" name="tanggal" required>
       <input type="time" name="waktu" required>
@@ -93,9 +96,15 @@
     <iframe name="dummyframe"></iframe>
 
     <div class="footer">
-      &copy; 2025 Sistem Keamanan Kantor. Versi ringan.
+      &copy; 2025 Sistem Keamanan Kantor
     </div>
   </div>
+
+  <script>
+    function tampilkanNotifikasi() {
+      alert("✅ Data berhasil dikirim!");
+    }
+  </script>
 
 </body>
 </html>
