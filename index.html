@@ -1,169 +1,81 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
   <meta charset="UTF-8">
   <title>Pencatatan Kendaraan</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-image: url('https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1350&q=80');
+      font-family: Arial, sans-serif;
+      background: url('https://source.unsplash.com/featured/?parking,car') no-repeat center center fixed;
       background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      margin: 0;
+      padding: 0;
     }
-
-    .overlay {
-      background-color: rgba(255, 255, 255, 0.9);
-      min-height: 100vh;
-      padding: 50px 20px;
-    }
-
     .container {
+      background-color: rgba(255, 255, 255, 0.9);
       max-width: 500px;
-      margin: auto;
-      background-color: white;
-      border-radius: 12px;
-      padding: 30px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-
-    h2 {
-      text-align: center;
-      color: #1a73e8;
-      margin-bottom: 25px;
-    }
-
     input, select, button {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
+      margin: 8px 0;
       font-size: 16px;
-      margin-bottom: 15px;
       border: 1px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
+      border-radius: 5px;
     }
-
     button {
-      background-color: #1a73e8;
-      color: #fff;
-      border: none;
-      font-weight: bold;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
       transition: background-color 0.3s ease;
     }
-
     button:hover {
-      background-color: #0b5ed7;
-      cursor: pointer;
+      background-color: #45a049;
     }
-
-    .footer {
+    h2 {
       text-align: center;
-      font-size: 12px;
-      color: #555;
-      margin-top: 20px;
-    }
-
-    .popup {
-      display: none;
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #4caf50;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 6px;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-      z-index: 999;
-    }
-
-    .popup.error {
-      background-color: #f44336;
+      color: #333;
     }
   </style>
 </head>
 <body>
 
-<div class="overlay">
   <div class="container">
     <h2>Pencatatan Kendaraan</h2>
 
-    <form id="formKendaraan">
+    <!-- Ganti action berikut dengan URL Web App Anda -->
+    <form method="POST" action="https://script.google.com/macros/s/AKfycbwTmKzuu9lI9AVEJWaxNRG5OXg0VMkMiHhaiEdV_ZsGI7XTFZyztoeD-t-7082WPWXK/exec" target="dummyframe" onsubmit="tampilkanNotifikasi()">
       <input type="date" name="tanggal" required>
       <input type="time" name="waktu" required>
-
       <select name="keterangan" required>
         <option value="">--Pilih Masuk/Keluar--</option>
         <option value="Masuk">Masuk</option>
         <option value="Keluar">Keluar</option>
       </select>
-
       <select name="jenis" required>
         <option value="">--Pilih Jenis Kendaraan--</option>
         <option value="Roda Dua">Roda Dua</option>
         <option value="Roda Empat">Roda Empat</option>
       </select>
-
       <input type="text" name="warna" placeholder="Warna Kendaraan" required>
       <input type="text" name="plat" placeholder="Nomor Plat" required>
-
-      <button type="submit">Simpan Data</button>
+      <button type="submit">Simpan</button>
     </form>
 
-    <div class="footer">
-      &copy; 2025 Sistem Keamanan Kantor
-    </div>
+    <!-- Iframe untuk submit tanpa reload -->
+    <iframe name="dummyframe" style="display:none;"></iframe>
   </div>
-</div>
 
-<!-- Popup Notification -->
-<div id="popup" class="popup">Data berhasil dikirim!</div>
-
-<!-- Script -->
-<script>
-  document.getElementById("formKendaraan").addEventListener("submit", async function(e) {
-    e.preventDefault();
-
-    const form = e.target;
-    const formData = new FormData(form);
-
-    const data = {};
-    formData.forEach((value, key) => data[key] = value);
-
-    const url = "https://script.google.com/macros/s/AKfycbwTmKzuu9lI9AVEJWaxNRG5OXg0VMkMiHhaiEdV_ZsGI7XTFZyztoeD-t-7082WPWXK/exec";
-
-    try {
-      const res = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-
-      const text = await res.text();
-      showPopup("✅ " + text, false);
-
-      // reset form
-      form.reset();
-
-    } catch (err) {
-      showPopup("❌ Gagal mengirim data", true);
+  <!-- Pop-up notifikasi -->
+  <script>
+    function tampilkanNotifikasi() {
+      alert("Data berhasil dikirim!"); // Bisa diganti dengan custom modal atau toast
     }
-  });
-
-  function showPopup(message, isError) {
-    const popup = document.getElementById("popup");
-    popup.textContent = message;
-    popup.className = "popup" + (isError ? " error" : "");
-    popup.style.display = "block";
-
-    setTimeout(() => {
-      popup.style.display = "none";
-    }, 3000);
-  }
-</script>
+  </script>
 
 </body>
 </html>
