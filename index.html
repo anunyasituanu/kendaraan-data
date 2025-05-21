@@ -1,81 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <title>Pencatatan Kendaraan</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: url('https://source.unsplash.com/featured/?parking,car') no-repeat center center fixed;
-      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #e9f0f5;
       margin: 0;
       padding: 0;
     }
+
     .container {
-      background-color: rgba(255, 255, 255, 0.9);
       max-width: 500px;
       margin: 50px auto;
-      padding: 20px;
+      background-color: #fff;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
     }
+
+    h2 {
+      text-align: center;
+      color: #1a73e8;
+      margin-bottom: 30px;
+    }
+
     input, select, button {
       width: 100%;
       padding: 10px;
-      margin: 8px 0;
+      margin-bottom: 15px;
       font-size: 16px;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 6px;
     }
+
     button {
-      background-color: #4CAF50;
+      background-color: #1a73e8;
       color: white;
+      border: none;
       cursor: pointer;
       transition: background-color 0.3s ease;
     }
+
     button:hover {
-      background-color: #45a049;
+      background-color: #0b5ed7;
     }
-    h2 {
+
+    iframe {
+      display: none;
+    }
+
+    .footer {
       text-align: center;
-      color: #333;
+      font-size: 13px;
+      color: #777;
+      margin-top: 20px;
     }
+
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h2>Pencatatan Kendaraan</h2>
+    <h2>Pencatatan Kendaraan Kantor</h2>
 
-    <!-- Ganti action berikut dengan URL Web App Anda -->
-    <form method="POST" action="https://script.google.com/macros/s/AKfycbwTmKzuu9lI9AVEJWaxNRG5OXg0VMkMiHhaiEdV_ZsGI7XTFZyztoeD-t-7082WPWXK/exec" target="dummyframe" onsubmit="tampilkanNotifikasi()">
+    <form method="POST" 
+          action="https://script.google.com/macros/s/AKfycbwTmKzuu9lI9AVEJWaxNRG5OXg0VMkMiHhaiEdV_ZsGI7XTFZyztoeD-t-7082WPWXK/exec" 
+          target="dummyframe">
+      
       <input type="date" name="tanggal" required>
       <input type="time" name="waktu" required>
+      
       <select name="keterangan" required>
         <option value="">--Pilih Masuk/Keluar--</option>
         <option value="Masuk">Masuk</option>
         <option value="Keluar">Keluar</option>
       </select>
+      
       <select name="jenis" required>
         <option value="">--Pilih Jenis Kendaraan--</option>
         <option value="Roda Dua">Roda Dua</option>
         <option value="Roda Empat">Roda Empat</option>
       </select>
+      
       <input type="text" name="warna" placeholder="Warna Kendaraan" required>
       <input type="text" name="plat" placeholder="Nomor Plat" required>
-      <button type="submit">Simpan</button>
+      
+      <button type="submit">Simpan Data</button>
     </form>
 
-    <!-- Iframe untuk submit tanpa reload -->
-    <iframe name="dummyframe" style="display:none;"></iframe>
-  </div>
+    <iframe name="dummyframe"></iframe>
 
-  <!-- Pop-up notifikasi -->
-  <script>
-    function tampilkanNotifikasi() {
-      alert("Data berhasil dikirim!"); // Bisa diganti dengan custom modal atau toast
-    }
-  </script>
+    <div class="footer">
+      &copy; 2025 Sistem Keamanan Kantor. Versi ringan.
+    </div>
+  </div>
 
 </body>
 </html>
