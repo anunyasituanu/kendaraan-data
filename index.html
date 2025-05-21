@@ -23,73 +23,31 @@
       text-align: center;
       color: #333;
     }
-    .success {
-      color: green;
-      text-align: center;
-    }
-    .error {
-      color: red;
-      text-align: center;
-    }
   </style>
 </head>
 <body>
 
   <h2>Pencatatan Kendaraan</h2>
 
-  <input type="date" id="tanggal" required>
-  <input type="time" id="waktu" required>
-  <select id="keterangan" required>
-    <option value="">--Pilih Masuk/Keluar--</option>
-    <option value="Masuk">Masuk</option>
-    <option value="Keluar">Keluar</option>
-  </select>
-  <select id="jenis" required>
-    <option value="">--Pilih Jenis Kendaraan--</option>
-    <option value="Roda Dua">Roda Dua</option>
-    <option value="Roda Empat">Roda Empat</option>
-  </select>
-  <input type="text" id="warna" placeholder="Warna Kendaraan" required>
-  <input type="text" id="plat" placeholder="Nomor Plat" required>
-  <button onclick="kirimData()">Simpan</button>
+  <form method="POST" action="https://script.google.com/macros/s/AKfycbwTmKzuu9lI9AVEJWaxNRG5OXg0VMkMiHhaiEdV_ZsGI7XTFZyztoeD-t-7082WPWXK/exec" target="dummyframe">
+    <input type="date" name="tanggal" required>
+    <input type="time" name="waktu" required>
+    <select name="keterangan" required>
+      <option value="">--Pilih Masuk/Keluar--</option>
+      <option value="Masuk">Masuk</option>
+      <option value="Keluar">Keluar</option>
+    </select>
+    <select name="jenis" required>
+      <option value="">--Pilih Jenis Kendaraan--</option>
+      <option value="Roda Dua">Roda Dua</option>
+      <option value="Roda Empat">Roda Empat</option>
+    </select>
+    <input type="text" name="warna" placeholder="Warna Kendaraan" required>
+    <input type="text" name="plat" placeholder="Nomor Plat" required>
+    <button type="submit">Simpan</button>
+  </form>
 
-  <div id="respon" class=""></div>
-
-  <script>
-    async function kirimData() {
-      const data = {
-        tanggal: document.getElementById("tanggal").value,
-        waktu: document.getElementById("waktu").value,
-        keterangan: document.getElementById("keterangan").value,
-        jenis: document.getElementById("jenis").value,
-        warna: document.getElementById("warna").value,
-        plat: document.getElementById("plat").value
-      };
-
-      // Ganti URL di bawah ini dengan URL Web App Anda
-      const url = "https://script.google.com/macros/s/AKfycbwTmKzuu9lI9AVEJWaxNRG5OXg0VMkMiHhaiEdV_ZsGI7XTFZyztoeD-t-7082WPWXK/exec";
-
-      try {
-        const respon = await fetch(url, {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        });
-
-        const teks = await respon.text();
-        document.getElementById("respon").innerText = teks;
-        document.getElementById("respon").className = "success";
-
-        // Reset form
-        document.querySelectorAll("input, select").forEach(el => el.value = "");
-      } catch (error) {
-        document.getElementById("respon").innerText = "Gagal mengirim data.";
-        document.getElementById("respon").className = "error";
-      }
-    }
-  </script>
+  <iframe name="dummyframe" style="display:none;"></iframe>
 
 </body>
 </html>
